@@ -26,15 +26,15 @@ public class ChainExample {
         students.add(new Student(5, "Arjun", 68));
 
         // Method Chaining: filter + map + collect
-        List<String> result = students.stream()
+        List<Integer> result = students.stream()
                 .filter(student -> student.marks > 60)
-                .map(student -> student.name)
+                .map(student -> student.id)
                 .collect(Collectors.toList());
 
         System.out.println("Students with marks greater than 60:");
 
-        for (String name : result) {
-            System.out.println(name);
+        for (Integer id : result) {
+            System.out.println(id);
         }
     }
 }

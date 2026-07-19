@@ -1,3 +1,4 @@
+15-07-2026 to 18-07-2026
 https://www.codechef.com/practice/course/java/LPJAAS01/problems/LJAAS01
 https://www.codechef.com/practice/course/java/LPJAAS01/problems/LJAAS02
 https://www.codechef.com/practice/course/java/LPJAAS01/problems/LJAAS03
@@ -87,3 +88,11 @@ https://www.codechef.com/practice/course/java/LPJAAS01/problems/LJAAS86
 https://www.codechef.com/practice/course/java/LPJAAS01/problems/LJAAS87
 https://www.codechef.com/practice/course/java/LPJAAS01/problems/LJAAS88
 https://www.codechef.com/practice/course/java/LPJAAS01/problems/LJAAS89
+
+19-07-2026
+https://www.codechef.com/practice/course/java/PJA03/problems/CBSPEEDp
+https://www.codechef.com/practice/course/java/PJA03/problems/ONEFULPAIRS
+https://www.codechef.com/practice/course/java/PJA03/problems/JPRACMCQ9
+https://www.codechef.com/practice/course/java/PJA03/problems/MARKSTW
+https://www.codechef.com/practice/course/java/PJA03/problems/JPRACMCQ6
+https://www.codechef.com/practice/course/java/PJA03/problems/JPRACMCQ5

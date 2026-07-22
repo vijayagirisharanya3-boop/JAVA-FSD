@@ -96,3 +96,14 @@ https://www.codechef.com/practice/course/java/PJA03/problems/JPRACMCQ9
 https://www.codechef.com/practice/course/java/PJA03/problems/MARKSTW
 https://www.codechef.com/practice/course/java/PJA03/problems/JPRACMCQ6
 https://www.codechef.com/practice/course/java/PJA03/problems/JPRACMCQ5
+
+21-07-2026
+https://www.codechef.com/practice/course/java/PJA04/problems/MY1STCONTEST
+https://www.codechef.com/practice/course/java/PJA04/problems/JPRACREARR2
+https://www.codechef.com/practice/course/java/PJA03/problems/JPRACMCQ5
+https://www.codechef.com/practice/course/java/LPJAAS08/problems/LJAAS71
+https://www.codechef.com/practice/course/java/LPJAAS07/problems/LJAAS61
+https://www.codechef.com/practice/course/java/LPJAAS06/problems/LJAAS52
+https://www.codechef.com/practice/course/java/LPJAAS09/problems/LJAAS86
+https://www.codechef.com/practice/course/java/LPJAAS09/problems/LJAAS87
+https://www.codechef.com/practice/course/java/LPJAAS10/problems/LJAAS99

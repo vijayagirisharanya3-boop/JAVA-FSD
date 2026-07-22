@@ -107,3 +107,12 @@ https://www.codechef.com/practice/course/java/LPJAAS06/problems/LJAAS52
 https://www.codechef.com/practice/course/java/LPJAAS09/problems/LJAAS86
 https://www.codechef.com/practice/course/java/LPJAAS09/problems/LJAAS87
 https://www.codechef.com/practice/course/java/LPJAAS10/problems/LJAAS99
+
+22-07-2026
+https://www.codechef.com/practice/course/java/PJA05/problems/JPRACREARR3
+https://www.codechef.com/practice/course/java/PJA05/problems/JPRACMCQ10
+https://www.codechef.com/practice/course/java/PJA06/problems/JPRACMCQ12
+https://www.codechef.com/practice/course/java/PJA06/problems/JPRACMCQ13
+https://www.codechef.com/practice/course/java/LPJAAS14/problems/LJAAS133
+https://www.codechef.com/practice/course/java/LPJAAS14/problems/LJAAS134
+https://www.codechef.com/practice/course/java/LPJAAS15/problems/LJAAS148

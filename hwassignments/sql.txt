@@ -335,3 +335,76 @@ INSERT INTO T10
 VALUES(TRUE);
 
 
+22-07-2026
+-- Create a new database
+CREATE DATABASE ShopDB;
+
+-- Switch to the new database
+USE ShopDB;
+-- Customers table
+CREATE TABLE Customers (
+    CustomerID INT PRIMARY KEY,
+    Name VARCHAR(50),
+    Email VARCHAR(50)
+);
+
+-- Orders table
+CREATE TABLE Orders (
+    OrderID INT PRIMARY KEY,
+    CustomerID INT,
+    Product VARCHAR(50),
+    Quantity INT,
+    FOREIGN KEY (CustomerID) REFERENCES Customers(CustomerID)
+);
+
+-- insertion
+-- Correct insert
+INSERT INTO Customers (CustomerID, Name, Email)
+VALUES (1, 'Sharanya', 'sharanya@email.com');
+
+-- Mistake 1: Missing column value
+INSERT INTO Customers (CustomerID, Name)
+VALUES (2, 'Ravi'); 
+--  Error: Column count doesn’t match
+
+-- Mistake 2: Wrong datatype
+INSERT INTO Orders (OrderID, CustomerID, Product, Quantity)
+VALUES (101, 1, 'Laptop', 'Five'); 
+--  Error: Quantity expects INT
+
+-- Mistake 3: Foreign key violation
+INSERT INTO Orders (OrderID, CustomerID, Product, Quantity)
+VALUES (102, 99, 'Phone', 2); 
+--  Error: No customer with ID 99
+
+-- CRUD operations
+-- create
+INSERT INTO Customers (CustomerID, Name, Email)
+VALUES (3, 'Anjali', 'anjali@email.com');
+-- read
+SELECT * FROM Customers;
+SELECT * FROM Orders WHERE CustomerID = 1;
+-- update
+UPDATE Customers
+SET Email = 'sharanya_new@email.com'
+WHERE CustomerID = 1;
+
+-- delete
+DELETE FROM Customers WHERE CustomerID = 3;
+
+-- drop,truncate,delete
+-- DELETE: removes rows but keeps table
+DELETE FROM Orders WHERE CustomerID = 1;
+
+-- TRUNCATE: removes all rows, resets identity
+TRUNCATE TABLE Orders;
+
+-- DROP: removes table completely
+DROP TABLE Orders;
+
+-- limit and offset
+-- Show only 2 records
+SELECT * FROM Customers LIMIT 2;
+
+-- Skip first 2 records, show next 2
+SELECT * FROM Customers LIMIT 2 OFFSET 2;

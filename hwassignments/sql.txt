@@ -639,4 +639,89 @@ FROM LibraryBooks
 CROSS BookIssues;
 ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'BookIssues' at line 3
 
+25-07-2026
+CREATE DATABASE company;
+Query OK, 1 row affected (0.02 sec)
 
+USE company;
+Database changed
+
+ CREATE TABLE Employee (
+    ->     id INT PRIMARY KEY,
+    ->     department VARCHAR(50),
+    ->     salary DECIMAL(10,2)
+    -> );
+Query OK, 0 rows affected (0.08 sec)
+Output:
+SELECT * FROM Employee;
+Empty set (0.00 sec)
+
+ INSERT INTO Employee (id, department, salary) VALUES
+    -> (101, 'HR', 45000),
+    -> (102, 'HR', 55000),
+    -> (103, 'HR', 50000),
+    -> (104, 'IT', 70000),
+    -> (105, 'IT', 85000),
+    -> (106, 'IT', 78000),
+    -> (107, 'Finance', 65000),
+    -> (108, 'Finance', 72000),
+    -> (109, 'Finance', 68000),
+    -> (110, 'Sales', 48000),
+    -> (111, 'Sales', 62000),
+    -> (112, 'Sales', 59000),
+    -> (113, 'Marketing', 53000),
+    -> (114, 'Marketing', 61000),
+    -> (115, 'Marketing', 57000);
+Query OK, 15 rows affected (0.02 sec)
+Records: 15  Duplicates: 0  Warnings: 0
+Output:
+ SELECT * FROM Employee;
++-----+------------+----------+
+| id  | department | salary   |
++-----+------------+----------+
+| 101 | HR         | 45000.00 |
+| 102 | HR         | 55000.00 |
+| 103 | HR         | 50000.00 |
+| 104 | IT         | 70000.00 |
+| 105 | IT         | 85000.00 |
+| 106 | IT         | 78000.00 |
+| 107 | Finance    | 65000.00 |
+| 108 | Finance    | 72000.00 |
+| 109 | Finance    | 68000.00 |
+| 110 | Sales      | 48000.00 |
+| 111 | Sales      | 62000.00 |
+| 112 | Sales      | 59000.00 |
+| 113 | Marketing  | 53000.00 |
+| 114 | Marketing  | 61000.00 |
+| 115 | Marketing  | 57000.00 |
++-----+------------+----------+
+15 rows in set (0.00 sec)
+
+ SELECT department, MAX(salary) AS highest_salary
+    -> FROM Employee
+    -> GROUP BY department;
+Output:
++------------+----------------+
+| department | highest_salary |
++------------+----------------+
+| HR         |       55000.00 |
+| IT         |       85000.00 |
+| Finance    |       72000.00 |
+| Sales      |       62000.00 |
+| Marketing  |       61000.00 |
++------------+----------------+
+5 rows in set (0.03 sec)
+
+
+ SELECT department, MAX(salary) AS highest_salary
+    -> FROM Employee
+    -> GROUP BY department
+    -> ORDER BY highest_salary DESC
+    -> LIMIT 1;
+output:
++------------+----------------+
+| department | highest_salary |
++------------+----------------+
+| IT         |       85000.00 |
++------------+----------------+
+1 row in set (0.00 sec)

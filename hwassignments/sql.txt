@@ -408,3 +408,149 @@ SELECT * FROM Customers LIMIT 2;
 
 -- Skip first 2 records, show next 2
 SELECT * FROM Customers LIMIT 2 OFFSET 2;
+
+23-07-2027
+CREATE TABLE LibraryBooks (
+    book_id INT PRIMARY KEY,
+    book_name VARCHAR(50),
+    author VARCHAR(50)
+);
+ // Error: Syntax error (missing comma).
+CREATE TABLE LibraryBooks (
+    book_id INT PRIMARY KEY
+    book_name VARCHAR(50),
+    author VARCHAR(50)
+);
+CREATE TABLE BookIssues (
+    issue_id INT PRIMARY KEY,
+    student_name VARCHAR(50),
+    book_id INT
+);
+ // Error: Duplicate column name issue_id.
+CREATE TABLE BookIssues (
+    issue_id INT,
+    issue_id INT,
+    student_name VARCHAR(50),
+    book_id INT
+);
+INSERT INTO LibraryBooks VALUES
+(101,'Java','James'),
+(102,'Python','Guido'),
+(103,'SQL','Codd'),
+(104,'C++','Bjarne');
+
+// Error: Column count doesn't match value count.
+INSERT INTO LibraryBooks VALUES
+(101,'Java');
+
+INSERT INTO BookIssues VALUES
+(1,'Sharanya',101),
+(2,'Mouni',102),
+(3,'Priya',105),
+(4,'Anu',103);
+
+//Error: Duplicate entry for PRIMARY KEY.
+INSERT INTO BookIssues VALUES
+(1,'Sharanya',101),
+(1,'Mouni',102);
+
+INNER JOIN:
+SELECT l.book_name, b.student_name
+FROM LibraryBooks l
+INNER JOIN BookIssues b
+ON l.book_id = b.book_id;
+
+//Error: Unknown column l.bookid.
+SELECT l.book_name, b.student_name
+FROM LibraryBooks l
+INNER JOIN BookIssues b
+ON l.bookid = b.book_id;
+
+LEFT JOIN:
+SELECT l.book_name, b.student_name
+FROM LibraryBooks l
+LEFT JOIN BookIssues b
+ON l.book_id = b.book_id;
+
+//Error: Missing ON clause.
+SELECT *
+FROM LibraryBooks l
+LEFT JOIN BookIssues b;
+
+RIGHT JOIN:
+SELECT l.book_name, b.student_name
+FROM LibraryBooks l
+RIGHT JOIN BookIssues b
+ON l.book_id = b.book_id;
+
+//Error: Unknown column l.id.
+SELECT *
+FROM LibraryBooks l
+RIGHT JOIN BookIssues b
+ON l.id = b.book_id;
+
+CROSS JOIN:
+SELECT l.book_name, b.student_name
+FROM LibraryBooks l
+CROSS JOIN BookIssues b;
+
+// Error: Syntax error (missing JOIN keyword).
+SELECT *
+FROM LibraryBooks
+CROSS BookIssues;
+
+
+Output:
+LibraryBooks
+book_id	book_name	author
+101	    Java	   James
+102   	Python	   Guido
+103	    SQL	       Codd
+104	    C++	       Bjarne
+
+Output:
+BookIssues
+issue_id	student_name	book_id
+1	Sharanya	101
+2	Mouni	    102
+3	Priya	    105
+4	Anu	         103
+
+Output:
+book_name	student_name
+Java	Sharanya
+Python	Mouni
+SQL	    Anu
+ 
+Output:
+book_name	student_name
+Java	Sharanya
+Python	Mouni
+SQL  	Anu
+C++	    NULL
+
+Output:
+book_name	student_name
+Java	Sharanya
+Java	Mouni
+Java	Priya
+Java	Anu
+Python	Bhavana
+Python	Mouni
+Python	Priya
+Python	Anu
+SQL	Sharanya
+SQL	Mouni
+SQL	Priya
+SQL	Anu
+C++	Sharanya
+C++	Mouni
+C++	Priya
+C++	Anu
+
+Output:
+book_name	student_name
+Java	Sharanya
+Python	Mouni
+SQL  	Anu
+NULL	Priya

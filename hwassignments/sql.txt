@@ -410,147 +410,233 @@ SELECT * FROM Customers LIMIT 2;
 SELECT * FROM Customers LIMIT 2 OFFSET 2;
 
 23-07-2027
+ CREATE DATABASE college;
+Query OK, 1 row affected (0.05 sec)
+
+ USE college;
+Database changed
+
 CREATE TABLE LibraryBooks (
     book_id INT PRIMARY KEY,
     book_name VARCHAR(50),
     author VARCHAR(50)
 );
+Query OK, 0 rows affected (0.10 sec)
  // Error: Syntax error (missing comma).
-CREATE TABLE LibraryBooks (
-    book_id INT PRIMARY KEY
-    book_name VARCHAR(50),
-    author VARCHAR(50)
-);
+ output:
+  SELECT * FROM LibraryBooks;
+Empty set (0.00 sec)
+
+
 CREATE TABLE BookIssues (
     issue_id INT PRIMARY KEY,
     student_name VARCHAR(50),
     book_id INT
 );
+Query OK, 0 rows affected (0.04 sec)
  // Error: Duplicate column name issue_id.
+ output:
+  SELECT * FROM BookIssues;
+Empty set (0.00 sec)
+
 CREATE TABLE BookIssues (
     issue_id INT,
     issue_id INT,
     student_name VARCHAR(50),
     book_id INT
 );
+ERROR 1050 (42S01): Table 'bookissues' already exists
+output:
+ SELECT * FROM BookIssues;
+Empty set (0.00 sec)
+
+
 INSERT INTO LibraryBooks VALUES
 (101,'Java','James'),
 (102,'Python','Guido'),
 (103,'SQL','Codd'),
 (104,'C++','Bjarne');
-
+Query OK, 4 rows affected (0.04 sec)
+Records: 4  Duplicates: 0  Warnings: 0
 // Error: Column count doesn't match value count.
+output:
+SELECT * FROM LibraryBooks;
++---------+-----------+--------+
+| book_id | book_name | author |
++---------+-----------+--------+
+|     101 | Java      | James  |
+|     102 | Python    | Guido  |
+|     103 | SQL       | Codd   |
+|     104 | C++       | Bjarne |
++---------+-----------+--------+
+4 rows in set (0.00 sec)
+
 INSERT INTO LibraryBooks VALUES
 (101,'Java');
+ERROR 1136 (21S01): Column count doesn't match value count at row 1
+output:
+SELECT * FROM LibraryBooks;
++---------+-----------+--------+
+| book_id | book_name | author |
++---------+-----------+--------+
+|     101 | Java      | James  |
+|     102 | Python    | Guido  |
+|     103 | SQL       | Codd   |
+|     104 | C++       | Bjarne |
++---------+-----------+--------+
+4 rows in set (0.00 sec)
 
 INSERT INTO BookIssues VALUES
 (1,'Sharanya',101),
 (2,'Mouni',102),
 (3,'Priya',105),
 (4,'Anu',103);
-
+Query OK, 4 rows affected (0.04 sec)
+Records: 4  Duplicates: 0  Warnings: 0
 //Error: Duplicate entry for PRIMARY KEY.
+output:
+SELECT * FROM BookIssues;
++----------+--------------+---------+
+| issue_id | student_name | book_id |
++----------+--------------+---------+
+|        1 | Sharanya     |     101 |
+|        2 | Mouni        |     102 |
+|        3 | Priya        |     105 |
+|        4 | Anu          |     103 |
++----------+--------------+---------+
+4 rows in set (0.00 sec)
+
 INSERT INTO BookIssues VALUES
 (1,'Sharanya',101),
 (1,'Mouni',102);
+ERROR 1062 (23000): Duplicate entry '1' for key 'bookissues.PRIMARY'
+output:
+ SELECT * FROM BookIssues;
++----------+--------------+---------+
+| issue_id | student_name | book_id |
++----------+--------------+---------+
+|        1 | Sharanya     |     101 |
+|        2 | Mouni        |     102 |
+|        3 | Priya        |     105 |
+|        4 | Anu          |     103 |
++----------+--------------+---------+
+4 rows in set (0.00 sec)
 
 INNER JOIN:
 SELECT l.book_name, b.student_name
 FROM LibraryBooks l
 INNER JOIN BookIssues b
 ON l.book_id = b.book_id;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'INNER JOIN:
+output:
++-----------+--------------+
+| book_name | student_name |
++-----------+--------------+
+| Java      | Sharanya     |
+| Python    | Mouni        |
+| SQL       | Anu          |
++-----------+--------------+
+3 rows in set (0.00 sec)
 
+SELECT l.book_name, b.student_name
+FROM LibraryBooks l
+INNER JOIN Bo' at line 1
 //Error: Unknown column l.bookid.
+
 SELECT l.book_name, b.student_name
 FROM LibraryBooks l
 INNER JOIN BookIssues b
 ON l.bookid = b.book_id;
+ERROR 1054 (42S22): Unknown column 'l.bookid' in 'on clause'
 
 LEFT JOIN:
 SELECT l.book_name, b.student_name
 FROM LibraryBooks l
 LEFT JOIN BookIssues b
 ON l.book_id = b.book_id;
-
+    -> ON l.book_id = b.book_id;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'LEFT JOIN:
+SELECT l.book_name, b.student_name
+FROM LibraryBooks l
+LEFT JOIN Book' at line 1
 //Error: Missing ON clause.
+output:
++-----------+--------------+
+| book_name | student_name |
++-----------+--------------+
+| Java      | Sharanya     |
+| Python    | Mouni        |
+| SQL       | Anu          |
+| C++       | NULL         |
++-----------+--------------+
+
 SELECT *
 FROM LibraryBooks l
 LEFT JOIN BookIssues b;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '' at line 3
 
 RIGHT JOIN:
 SELECT l.book_name, b.student_name
 FROM LibraryBooks l
 RIGHT JOIN BookIssues b
 ON l.book_id = b.book_id;
-
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'RIGHT JOIN:
+SELECT l.book_name, b.student_name
+FROM LibraryBooks l
+RIGHT JOIN Bo' at line 1
 //Error: Unknown column l.id.
+Output:
++-----------+--------------+
+| book_name | student_name |
++-----------+--------------+
+| Java      | Sharanya     |
+| Python    | Mouni        |
+| NULL      | Priya        |
+| SQL       | Anu          |
++-----------+--------------+
+4 rows in set (0.00 sec)
+
 SELECT *
 FROM LibraryBooks l
 RIGHT JOIN BookIssues b
 ON l.id = b.book_id;
+ERROR 1054 (42S22): Unknown column 'l.id' in 'on clause'
 
 CROSS JOIN:
 SELECT l.book_name, b.student_name
 FROM LibraryBooks l
 CROSS JOIN BookIssues b;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'CROSS JOIN:
+output:
++-----------+--------------+
+| book_name | student_name |
++-----------+--------------+
+| C++       | Sharanya     |
+| SQL       | Sharanya     |
+| Python    | Sharanya     |
+| Java      | Sharanya     |
+| C++       | Mouni        |
+| SQL       | Mouni        |
+| Python    | Mouni        |
+| Java      | Mouni        |
+| C++       | Priya        |
+| SQL       | Priya        |
+| Python    | Priya        |
+| Java      | Priya        |
+| C++       | Anu          |
+| SQL       | Anu          |
+| Python    | Anu          |
+| Java      | Anu          |
++-----------+--------------+
+16 rows in set (0.00 sec)
 
+SELECT l.book_name, b.student_name
+FROM LibraryBooks l
+CROSS JOIN Bo' at line 1
 // Error: Syntax error (missing JOIN keyword).
 SELECT *
 FROM LibraryBooks
 CROSS BookIssues;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'BookIssues' at line 3
 
 
-Output:
-LibraryBooks
-book_id	book_name	author
-101	    Java	   James
-102   	Python	   Guido
-103	    SQL	       Codd
-104	    C++	       Bjarne
-
-Output:
-BookIssues
-issue_id	student_name	book_id
-1	Sharanya	101
-2	Mouni	    102
-3	Priya	    105
-4	Anu	         103
-
-Output:
-book_name	student_name
-Java	Sharanya
-Python	Mouni
-SQL	    Anu
- 
-Output:
-book_name	student_name
-Java	Sharanya
-Python	Mouni
-SQL  	Anu
-C++	    NULL
-
-Output:
-book_name	student_name
-Java	Sharanya
-Java	Mouni
-Java	Priya
-Java	Anu
-Python	Bhavana
-Python	Mouni
-Python	Priya
-Python	Anu
-SQL	Sharanya
-SQL	Mouni
-SQL	Priya
-SQL	Anu
-C++	Sharanya
-C++	Mouni
-C++	Priya
-C++	Anu
-
-Output:
-book_name	student_name
-Java	Sharanya
-Python	Mouni
-SQL  	Anu
-NULL	Priya
